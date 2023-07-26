@@ -50,7 +50,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 	// Таймер
 	// Час доки має іти таймер
-	const deadline = "2023-7-23";
+	const deadline = "2024-7-23";
 
 	// Робим розрахунки
 	function setClock(endTime) {
@@ -393,7 +393,6 @@ window.addEventListener("DOMContentLoaded", () => {
 		dots.push(dot);
 	}
 	//
-
 	dots.forEach((dot) => {
 		dot.addEventListener("click", (e) => {
 			const target = e.target;
