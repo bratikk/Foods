@@ -1,50 +1,52 @@
 window.addEventListener("DOMContentLoaded", () => {
 	class CookieConsent {
-		constructor({ popup, btnConfirm, btnCnacel, activeClass = "" } = {}) {
+		constructor({ popup, btnAllow, btnCancel, activeClass = "" } = {}) {
 			this.popup = document.querySelector(popup);
-			this.btnConfirm = document.querySelector(btnConfirm);
-			this.btnCancel = document.querySelector(btnCnacel);
+			this.btnAllow = document.querySelector(btnAllow);
+			this.btnCancel = document.querySelector(btnCancel);
 			this.activeClass = activeClass;
 			this.consentPropertyType = "site_consent";
 		}
+		//
 		getItem = (key) => {
-			const cookies = document.cookie
+			const cookie = document.cookie
 				.split(";")
 				.map((cookie) => cookie.split("="))
 				.reduce((acc, [key, value]) => ({ ...acc, [key.trim()]: value }), {});
-			return cookies[key];
+			return cookie[key];
 		};
-
+		//
 		setItem = (key, value) => {
 			document.cookie = `${key}=${value}`;
 		};
-
+		//
 		hasConsented = () => {
-			return this.getItem(this.consentPropertyType) === "true" ? true : false;
+			return this.getItem(this.consentPropertyType) === "true";
 		};
-
-		changeStatus = (prop) => {
-			this.setItem(this.consentPropertyType, prop);
+		//
+		changeStatus = (status) => {
+			this.setItem(this.consentPropertyType, status);
 			if (this.hasConsented()) {
 				myScripts();
 			}
 		};
-
+		//
 		bindTriggers = () => {
-			this.btnConfirm.addEventListener("click", () => {
-				this.hideStatus(true);
+			this.btnAllow.addEventListener("click", () => {
+				this.hidePopup(true);
+				console.log("Loading...");
 			});
 
 			this.btnCancel.addEventListener("click", () => {
-				this.hideStatus(false);
+				this.hidePopup(false);
 			});
 		};
-
-		hideStatus = (status) => {
+		//
+		hidePopup = (status) => {
 			this.changeStatus(status);
-			this.popup.classList.remove(this.activeClass);
+			this.popup.classList.remove("popup_active");
 		};
-
+		//
 		init = () => {
 			try {
 				if (this.hasConsented()) {
@@ -54,22 +56,21 @@ window.addEventListener("DOMContentLoaded", () => {
 				}
 				this.bindTriggers();
 			} catch (e) {
-				console.log("Не передані усі дані");
+				console.log(e);
 			}
 		};
 	}
-	//
-	new CookieConsent({
-		popup: ".popup",
-		btnConfirm: "[data-allow]",
-		btnCnacel: "[data-cancel]",
-		activeClass: "popup_active",
-	}).init();
 
 	function myScripts() {
-		// Код який виконуєтся при пітверджені
 		console.log("Loading...");
 	}
+
+	new CookieConsent({
+		popup: ".popup",
+		btnAllow: "[data-allow]",
+		btnCancel: "[data-cancel]",
+		activeClass: "popup_active",
+	}).init();
 });
 
 // const cookieStorage = {
