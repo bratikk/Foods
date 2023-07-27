@@ -530,7 +530,6 @@ window.addEventListener("DOMContentLoaded", () => {
 			culcTotal();
 		});
 	}
-
 	getDynamicInformation("#height");
 	getDynamicInformation("#weight");
 	getDynamicInformation("#age");
