@@ -12,7 +12,13 @@ window.addEventListener("DOMContentLoaded", () => {
 			const cookie = document.cookie
 				.split(";")
 				.map((cookie) => cookie.split("="))
-				.reduce((acc, [key, value]) => ({ ...acc, [key.trim()]: value }), {});
+				.reduce(
+					(acc, [key, value]) => ({
+						...acc,
+						[key.trim()]: value,
+					}),
+					{}
+				);
 			return cookie[key];
 		};
 		//
