@@ -1,7 +1,7 @@
-function tabs() {
-	const tabContent = document.querySelectorAll(".tabcontent"),
-		tabs = document.querySelectorAll(".tabheader__item"),
-		tabsParent = document.querySelector(".tabheader__items");
+function tabs(tabsSelector, tabsContentSelector, tabsParentSelector, activeClass) {
+	const tabs = document.querySelectorAll(tabsSelector),
+		tabContent = document.querySelectorAll(tabsContentSelector),
+		tabsParent = document.querySelector(tabsParentSelector);
 	// Ховаєм для початку контент
 	function hideContent() {
 		tabContent.forEach(
@@ -10,7 +10,7 @@ function tabs() {
 				tab.classList.remove("show", "fade");
 			},
 			tabs.forEach((item) => {
-				item.classList.remove("tabheader__item_active");
+				item.classList.remove(activeClass);
 			})
 		);
 	}
@@ -18,14 +18,14 @@ function tabs() {
 	function showContent(i = 0) {
 		tabContent[i].classList.add("show", "fade");
 		tabContent[i].classList.remove("hide");
-		tabs[i].classList.add("tabheader__item_active");
+		tabs[i].classList.add(activeClass);
 	}
 	// Викликаєм функції
 	hideContent();
 	showContent();
 	// Делегуваня для кліку та передачі індексу кнопки
 	tabsParent.addEventListener("click", (e) => {
-		if (e.target && e.target.classList.contains("tabheader__item")) {
+		if (e.target && e.target.classList.contains(tabsSelector.slice(1))) {
 			tabs.forEach((item, i) => {
 				if (item == e.target) {
 					hideContent();
@@ -36,4 +36,4 @@ function tabs() {
 	});
 }
 
-module.exports = tabs;
+export default tabs;

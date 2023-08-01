@@ -1,6 +1,9 @@
-function form() {
+import { closeModal, openModal } from "./modal";
+import { postInfo } from "../services/services";
+
+function form(formSelector, modalTimer) {
 	// Форма відправки
-	const forms = document.querySelectorAll("form");
+	const forms = document.querySelectorAll(formSelector);
 	// Перебераєм форми та надсилаєм їх у функцію
 	forms.forEach((form) => {
 		bindPostInfo(form);
@@ -14,16 +17,7 @@ function form() {
 			failed: "Щось пішло не так",
 		};
 		// Функція заготовка яка буде надсилати дані при її виклиці
-		const postInfo = async (url, date) => {
-			const res = await fetch(url, {
-				method: "POST",
-				headers: {
-					"Content-type": "application/json",
-				},
-				body: date,
-			});
-			return await res.json();
-		};
+
 		//
 		form.addEventListener("submit", (e) => {
 			e.preventDefault();
@@ -51,5 +45,26 @@ function form() {
 		});
 	}
 	//
+	function showStatusModal(message) {
+		//
+		const parentModal = document.querySelector(".modal__dialog");
+		parentModal.classList.add("hide"); // закриваєм минуле модальне вікно
+		openModal(".modal", modalTimer); // Відкриваєм уже з новими даними
+		//
+		const thanksModal = document.createElement("div");
+		thanksModal.classList.add("modal__dialog");
+		thanksModal.innerHTML = `
+		 <div class="modal__content">
+       <div data-close class="modal__close">×</div>
+		 <div class="modal__title">${message}</div>`;
+
+		document.querySelector(".modal").append(thanksModal);
+		setTimeout(() => {
+			thanksModal.remove();
+			parentModal.classList.add("show");
+			parentModal.classList.remove("hide");
+			closeModal(".modal");
+		}, 5000);
+	}
 }
-module.exports = form;
+export default form;

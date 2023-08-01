@@ -68,7 +68,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	}
 
 	function myScripts() {
-		console.log("Loading...");
+		// console.log("Loading...");
 	}
 
 	new CookieConsent({

@@ -1,14 +1,15 @@
-function slider() {
+// prettier-ignore
+function slider({ container, slide , nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field}) {
 	// Слайдер
 
-	const slider = document.querySelector(".offer__slider"), // Весь обгортка слайдера щоб повісити позишин релатів
-		slidesWrapper = document.querySelector(".offer__slider-wrapper"), // Головна обгортка для слейдеру
-		slidesFiled = document.querySelector(".offer_slider-inner"), // Обгортка для всіх слайдерів
-		slides = document.querySelectorAll(".offer__slide"), // Обгортка для картинок
-		back = document.querySelector(".offer__slider-prev"), // Кнопка назад
-		next = document.querySelector(".offer__slider-next"), // Кнопка вперед
-		total = document.querySelector("#total"), // Загальна кількість картинок/слайдерів
-		current = document.querySelector("#current"), // Поточний слайдер
+	const slider = document.querySelector(container), // container // Весь обгортка слайдера щоб повісити позишин релатів
+		slidesWrapper = document.querySelector(wrapper), // Головна обгортка для слейдеру
+		slidesFiled = document.querySelector(field), // Обгортка для всіх слайдерів
+		slides = document.querySelectorAll(slide), // slide // Обгортка для картинок
+		back = document.querySelector(prevArrow), // Кнопка назад
+		next = document.querySelector(nextArrow), // Кнопка вперед
+		total = document.querySelector(totalCounter), // Загальна кількість картинок/слайдерів
+		current = document.querySelector(currentCounter), // Поточний слайдер
 		width = getComputedStyle(slidesWrapper).width; // Ширина слайдера
 	//
 	let sliderIndex = 1;
@@ -137,4 +138,4 @@ list-style: none;
 		return res;
 	}
 }
-module.exports = slider;
+export default slider;

@@ -1,8 +1,4 @@
-function timer() {
-	// Таймер
-	// Час доки має іти таймер
-	const deadline = "2024-7-23";
-
+function timer(id, deadline) {
 	// Робим розрахунки
 	function setClock(endTime) {
 		const t = Math.floor(Date.parse(endTime) - Date.parse(new Date())),
@@ -21,8 +17,9 @@ function timer() {
 	}
 
 	// Получаєм елементи і вставляєм на сайт
-	function updateClock(endTime) {
-		const days = document.querySelector("#days"),
+	function updateClock(selector, endTime) {
+		const timer = document.querySelector(selector),
+			days = document.querySelector("#days"),
 			hours = document.querySelector("#hours"),
 			minutes = document.querySelector("#minutes"),
 			seconds = document.querySelector("#seconds"),
@@ -41,9 +38,8 @@ function timer() {
 	function checkZero(num) {
 		return num >= 0 && num < 10 ? `0${num}` : num;
 	}
-	updateClock(deadline);
+	updateClock(id, deadline);
 
 	// -----
 }
-
-module.exports = timer;
+export default timer;

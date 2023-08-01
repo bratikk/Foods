@@ -26,18 +26,13 @@ function calc() {
 			if (elem.getAttribute("id") == localStorage.getItem("gender")) {
 				elem.classList.add(activeClass);
 			}
-			if (
-				elem.getAttribute("data-ratio") == localStorage.getItem("ratio")
-			) {
+			if (elem.getAttribute("data-ratio") == localStorage.getItem("ratio")) {
 				elem.classList.add(activeClass);
 			}
 		});
 	}
 	initLocalStorage("#gender div", "calculating__choose-item_active");
-	initLocalStorage(
-		".calculating__choose_big div",
-		"calculating__choose-item_active"
-	);
+	initLocalStorage(".calculating__choose_big div", "calculating__choose-item_active");
 
 	//
 	function calcTotal() {
@@ -51,8 +46,7 @@ function calc() {
 			);
 		} else {
 			result.textContent = Math.round(
-				(88.362 + 13.397 * weight + 4.799 * height - 5.677 * age) *
-					ratio
+				(88.362 + 13.397 * weight + 4.799 * height - 5.677 * age) * ratio
 			);
 		}
 	}
@@ -65,10 +59,7 @@ function calc() {
 			elem.addEventListener("click", (e) => {
 				if (e.target.getAttribute("data-ratio")) {
 					ratio = e.target.getAttribute("data-ratio");
-					localStorage.setItem(
-						"ratio",
-						e.target.getAttribute("data-ratio")
-					);
+					localStorage.setItem("ratio", e.target.getAttribute("data-ratio"));
 				} else {
 					gender = e.target.getAttribute("id");
 					localStorage.setItem("gender", e.target.getAttribute("id"));
@@ -82,10 +73,7 @@ function calc() {
 		});
 	}
 	getStaticInfo("#gender div", "calculating__choose-item_active");
-	getStaticInfo(
-		".calculating__choose_big div",
-		"calculating__choose-item_active"
-	);
+	getStaticInfo(".calculating__choose_big div", "calculating__choose-item_active");
 	//
 	function getDunamicInfo(selector) {
 		const input = document.querySelector(selector);
@@ -117,4 +105,4 @@ function calc() {
 	getDunamicInfo("#age");
 }
 
-module.exports = calc;
+export default calc;
